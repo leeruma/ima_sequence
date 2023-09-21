@@ -14,22 +14,42 @@
 // 현재수치값 / 전체수치값 * 100 (백분율)
 // 현재수치값 / 전체수치값 * 200 (이백분율)
 
+const num = 200;
 const section = document.querySelector('section');
+const imgs = createImgs(section, num);
+console.log(imgs);
 
-for (let i = 0; i <= 200; i++) {
-	const img = document.createElement('img');
-	const src = document.createAttribute('src');
-	src.value = `img/pic${i}.jpg`;
-	img.setAttributeNode(src);
-
-	section.append(img);
-}
+// activation 함수 추가 : 인수로 유사배열, 활성화 순번 받음
+// 순번에 대한 요소만 보임처리
 
 window.addEventListener('mousemove', (e) => {
+	const percent = getPercent(e, num);
+	activation(imgs, percent);
+});
+
+// 이벤트정보 객체와 전체 개수를 받아서 해당 숫자에 대한 백분율 반환 함수
+function getPercent(e, num) {
 	const curPos = e.pageX;
 	const wid = window.innerWidth;
-	const percent = parseInt((curPos / wid) * 200);
-	console.log(percent);
-	// parseInt(숫자) : 실수에서 소수점 아래를 버려서 정수 반환
-	// parseFloat(숫자) : 실수에서 소수점 아래까지 있는 실수 반환
-});
+	return parseInt((curPos / wid) * num);
+}
+
+// 인수로 갯수를 받아서 동적으로 img 생성해 주는 함수
+function createImgs(target, num) {
+	for (let i = 0; i < num; i++) {
+		const img = document.createElement('img');
+		const src = document.createAttribute('src');
+		src.value = `img/pic${i}.jpg`;
+		img.setAttributeNode(src);
+
+		target.append(img);
+	}
+	return target.querySelectorAll('img');
+}
+
+// 인수로 그룹유사배열, 활성화 순번을 받아서
+// 해당 순번의 요소만 활성화처리
+function activation(arr, index) {
+	arr.forEach((el) => (el.style.display = 'none'));
+	arr[index].style.display = 'block';
+}
