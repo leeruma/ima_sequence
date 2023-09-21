@@ -10,6 +10,10 @@
 // 위의 작업을 100반복을 돌리면서
 // append로 이미지 요소 반복추가
 
+// 백분율 구하는 공식
+// 현재수치값 / 전체수치값 * 100 (백분율)
+// 현재수치값 / 전체수치값 * 200 (이백분율)
+
 const section = document.querySelector('section');
 
 for (let i = 0; i <= 200; i++) {
@@ -20,3 +24,12 @@ for (let i = 0; i <= 200; i++) {
 
 	section.append(img);
 }
+
+window.addEventListener('mousemove', (e) => {
+	const curPos = e.pageX;
+	const wid = window.innerWidth;
+	const percent = parseInt((curPos / wid) * 200);
+	console.log(percent);
+	// parseInt(숫자) : 실수에서 소수점 아래를 버려서 정수 반환
+	// parseFloat(숫자) : 실수에서 소수점 아래까지 있는 실수 반환
+});
