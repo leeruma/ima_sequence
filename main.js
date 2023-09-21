@@ -12,9 +12,11 @@
 
 const section = document.querySelector('section');
 
-const img = document.createElement('img');
-const src = document.createAttribute('src');
-src.value = 'img/pic100.jpg';
-img.setAttributeNode(src);
+for (let i = 0; i <= 200; i++) {
+	const img = document.createElement('img');
+	const src = document.createAttribute('src');
+	src.value = `img/pic${i}.jpg`;
+	img.setAttributeNode(src);
 
-section.append(img);
+	section.append(img);
+}
