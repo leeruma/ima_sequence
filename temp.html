@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <h1>Hello</h1>
+  <!-- 
+    static DOM (HTML태그로 구성하는 돔)
+    dynamic DOM (자바스크립트로 구성하는 돔)
+    <article>
+      <a href="#">link</a>
+    </article> 
+  
+    <a href="#">link</a> 
+    template literal
+    : 문자안에 변수를 편하게 삽입할때
+    BOM (Browser Object model) window
+    DOM (Document Object model)
+    - html (element node)
+    - a (a element node , text node, attribute node)
+  -->
+
+  <script>
+    const link = '#';
+    '<a href="' + link + '">링크</a>'; //es5
+    `<a href=${link}">링크</a>` //es6
+
+    const url = 'https://www.naver.com';
+    const text = '네이버'
+
+    //부모프레임.innerHTML = '자식태그 문자열';
+    //innerHTML은 기존 프레임안쪽의 값을 없애버리로 대입되는 문자열로 바꿔치기
+    document.body.innerHTML = `
+    <article>
+      <a href="${url}">${text}</a>
+    </article> 
+    `
+    const a = document.createElement('a');
+    const href = document.createAttribute('href');
+    text = 'link';
+    href.value = '#';
+    a.setAttributeNode(href);
+    a.innerText = text;
+
+    //appned: 기존 부모요소의 DOM구조를 유지하면서 추가로 DOM을 삽입
+    //인수로는 노드객체만 전달가능
+    //document.body.append(a);
+    document.body.prepend(a);
+  </script>
+</body>
+
+</html>
